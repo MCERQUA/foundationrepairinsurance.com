@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-blue: #2C4A6E;
+  --brand-amber: #D4722A;
+  --brand-dark: #1C1C1E;
+  --brand-stone: #F5F3EF;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: #ffffff;
+  color: var(--brand-dark);
+  font-family: var(--font-source), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-montserrat), system-ui, sans-serif; }
+
+.soil-lines {
+  background-image: repeating-linear-gradient(
+    180deg,
+    rgba(44, 74, 110, 0.06) 0px,
+    rgba(44, 74, 110, 0.06) 1px,
+    transparent 1px,
+    transparent 22px
+  );
+}
+
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
