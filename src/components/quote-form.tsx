@@ -5,6 +5,26 @@ import { CheckCircle2 } from 'lucide-react'
 export function QuoteForm({ formName = 'quote' }: { formName?: string }) {
   const [submitted, setSubmitted] = useState(false)
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const data: Record<string, string> = {}
+    new FormData(e.currentTarget).forEach((value, key) => {
+      data[key] = value.toString()
+    })
+    // Deliver lead directly to the leads webhook (SSR Netlify form capture is unreliable).
+    try {
+      const WEBHOOK_URL = `https://josh.jam-bot.com/social-api/api/leads/webhook/netlify?tenant=josh&site=foundationrepairinsurance.com`
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ form_name: formName, source: 'foundationrepairinsurance.com', ...data }),
+      })
+    } catch {
+      // lead webhook failed — do not block submission UX
+    }
+    setSubmitted(true)
+  }
+
   if (submitted) {
     return (
       <div className="rounded-xl border border-green-200 bg-green-50 p-8 text-center">
@@ -24,7 +44,7 @@ export function QuoteForm({ formName = 'quote' }: { formName?: string }) {
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
-      onSubmit={() => setSubmitted(true)}
+      onSubmit={handleSubmit}
       className="grid gap-4 rounded-xl border border-brand-warm bg-white p-6 shadow-sm sm:p-8"
     >
       <input type="hidden" name="form-name" value={formName} />
