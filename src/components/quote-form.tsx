@@ -1,11 +1,11 @@
 'use client'
-import { useState } from 'react'
+import { useState, type FormEvent } from 'react'
 import { CheckCircle2 } from 'lucide-react'
 
 export function QuoteForm({ formName = 'quote' }: { formName?: string }) {
   const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const data: Record<string, string> = {}
     new FormData(e.currentTarget).forEach((value, key) => {
