@@ -5,3 +5,5 @@ deploy_key.pub
 .next/
 out/
 node_modules/
+
+.autosave-gated
