@@ -192,32 +192,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. TESTIMONIALS */}
-      <section className="bg-brand-stone py-20">
-        <div className="mx-auto max-w-7xl px-5">
-          <Reveal className="mx-auto max-w-2xl text-center">
-            <span className="font-heading text-sm font-bold uppercase tracking-wide text-brand-amber">What Contractors Say</span>
-            <h2 className="mt-2 font-heading text-3xl font-extrabold text-brand-dark sm:text-4xl">Trusted by foundation repair owners</h2>
-          </Reveal>
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal key={i} delay={i * 0.07}>
-                <div className="flex h-full flex-col rounded-xl border border-brand-warm bg-white p-7 shadow-sm">
-                  <div className="flex gap-1 text-brand-amber">
-                    {Array.from({ length: 5 }).map((_, j) => <Star key={j} size={16} fill="currentColor" />)}
-                  </div>
-                  <p className="mt-4 flex-1 text-[15px] leading-relaxed text-brand-dark/80">&ldquo;{t.quote}&rdquo;</p>
-                  <div className="mt-5 border-t border-brand-warm pt-4">
-                    <div className="font-heading text-sm font-bold text-brand-dark">{t.name}</div>
-                    <div className="text-xs text-brand-dark/55">{t.role}</div>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 9. FAQ */}
       <section className="py-20">
         <div className="mx-auto max-w-7xl px-5">
