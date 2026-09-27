@@ -11,6 +11,7 @@ const source = Source_Sans_3({ subsets: ['latin'], weight: ['400', '600', '700']
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
+  icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }, { url: "/favicon.ico", sizes: "32x32" }] },
   title: {
     default: 'Foundation Repair Contractor Insurance | Contractors Choice Agency',
     template: '%s | Foundation Repair Insurance',
@@ -47,7 +48,7 @@ const orgSchema = {
   email: site.email,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '12220 E Riggs Rd',
+    streetAddress: '12220 E Riggs Rd, Suite #104',
     addressLocality: 'Chandler',
     addressRegion: 'AZ',
     postalCode: '85249',
