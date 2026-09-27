@@ -4,7 +4,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: { blue: '#2C4A6E', amber: '#D4722A', dark: '#1C1C1E', stone: '#F5F3EF', warm: '#EDEAE5' }
+        brand: { blue: '#4A3226', amber: '#D4722A', dark: '#1C1C1E', stone: '#F5F3EF', warm: '#EDEAE5' }
       },
       fontFamily: {
         heading: ['var(--font-montserrat)', 'system-ui', 'sans-serif'],

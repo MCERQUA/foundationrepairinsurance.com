@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --brand-blue: #2C4A6E;
+  --brand-blue: #4A3226;
   --brand-amber: #D4722A;
   --brand-dark: #1C1C1E;
   --brand-stone: #F5F3EF;
@@ -21,8 +21,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--font-montserrat), system-ui, sans-se
 .soil-lines {
   background-image: repeating-linear-gradient(
     180deg,
-    rgba(44, 74, 110, 0.06) 0px,
-    rgba(44, 74, 110, 0.06) 1px,
+    rgba(74, 50, 38, 0.06) 0px,
+    rgba(74, 50, 38, 0.06) 1px,
     transparent 1px,
     transparent 22px
   );
