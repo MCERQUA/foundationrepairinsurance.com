@@ -1,13 +1,27 @@
 import type { Metadata } from 'next'
-import { Montserrat, Source_Sans_3 } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { LenisProvider } from '@/components/lenis-provider'
 import { site } from '@/lib/site'
 
-const montserrat = Montserrat({ subsets: ['latin'], weight: ['600', '700', '800'], variable: '--font-montserrat' })
-const source = Source_Sans_3({ subsets: ['latin'], weight: ['400', '600', '700'], variable: '--font-source' })
+const montserrat = localFont({
+  src: [
+    { path: './fonts/Montserrat-variable.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/Montserrat-variable.woff2', weight: '700', style: 'normal' },
+    { path: './fonts/Montserrat-variable.woff2', weight: '800', style: 'normal' },
+  ],
+  variable: '--font-montserrat',
+})
+const source = localFont({
+  src: [
+    { path: './fonts/SourceSans3-variable.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/SourceSans3-variable.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/SourceSans3-variable.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-source',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
