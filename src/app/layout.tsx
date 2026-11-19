@@ -25,7 +25,7 @@ const source = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }, { url: "/favicon.ico", sizes: "32x32" }] },
+  icons: { icon: [{ url: "/favicon.ico", sizes: "32x32" }, { url: "/icon.png", type: "image/png", sizes: "512x512" }] },
   title: {
     default: 'Foundation Repair Contractor Insurance | Contractors Choice Agency',
     template: '%s | Foundation Repair Insurance',
