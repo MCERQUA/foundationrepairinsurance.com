@@ -4,6 +4,7 @@ import { CheckCircle2 } from 'lucide-react'
 
 export function QuoteForm({ formName = 'quote' }: { formName?: string }) {
   const [submitted, setSubmitted] = useState(false)
+  const [failed, setFailed] = useState(false)
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -11,18 +12,38 @@ export function QuoteForm({ formName = 'quote' }: { formName?: string }) {
     new FormData(e.currentTarget).forEach((value, key) => {
       data[key] = value.toString()
     })
-    // Deliver lead directly to the leads webhook (SSR Netlify form capture is unreliable).
+    // Deliver lead to the leads webhook; a 2xx whose body says stored:false (or any failure) falls back
+    // to Netlify Forms. Success is shown only if one of the two channels took the lead.
+    setFailed(false)
+    let captured = false
     try {
       const WEBHOOK_URL = `https://josh.jam-bot.com/social-api/api/leads/webhook/netlify?tenant=josh&site=foundationrepairinsurance.com`
-      await fetch(WEBHOOK_URL, {
+      const res = await fetch(WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ form_name: formName, source: 'foundationrepairinsurance.com', ...data }),
       })
+      if (res.ok) {
+        const body = await res.json().catch(() => null)
+        captured = !(body && body.stored === false)
+      }
     } catch {
-      // lead webhook failed — do not block submission UX
+      // webhook unreachable: fall through to Netlify Forms
     }
-    setSubmitted(true)
+    if (!captured) {
+      try {
+        const fres = await fetch('/__forms.html', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ 'form-name': formName, ...data }).toString(),
+        })
+        captured = fres.ok
+      } catch {
+        // both channels failed
+      }
+    }
+    if (captured) setSubmitted(true)
+    else setFailed(true)
   }
 
   if (submitted) {
@@ -81,6 +102,11 @@ export function QuoteForm({ formName = 'quote' }: { formName?: string }) {
         <label className="text-sm font-semibold text-brand-dark">Anything else we should know?</label>
         <textarea name="message" rows={4} className="rounded-md border border-brand-warm bg-white px-3.5 py-2.5 text-sm focus:border-brand-blue focus:outline-none" />
       </div>
+      {failed && (
+        <p role="alert" className="rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm font-semibold text-red-800">
+          That did not send. Your details are still here. Please try again, or call 844-967-5247.
+        </p>
+      )}
       <button type="submit" className="mt-1 rounded-md bg-brand-amber px-6 py-3 font-heading text-sm font-bold text-white shadow-sm transition hover:bg-[#bb6122]">
         Get My Free Quote
       </button>
