@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Phone, Clock, ShieldCheck, Award } from 'lucide-react'
 import { site } from '@/lib/site'
-import { QuoteForm } from '@/components/quote-form'
+import { FoundationQuote } from '@/components/quote/FoundationQuote'
 
 export const metadata: Metadata = {
   title: 'Get a Free Foundation Repair Insurance Quote',
@@ -38,7 +38,7 @@ export default function Quote() {
           </div>
         </div>
         <div>
-          <QuoteForm formName="quote" />
+          <FoundationQuote />
         </div>
       </div>
     </section>
